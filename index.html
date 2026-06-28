@@ -380,7 +380,7 @@
           <button onClick="{{ reset }}" style="margin-top:8px;background:transparent;border:1px solid rgba(236,237,240,0.3);color:#ECEDF0;font-size:14px;font-weight:600;padding:11px 22px;border-radius:100px;cursor:pointer">Send another</button>
         </div>
       </sc-if>
-      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <div ref="{{ formWrapRef }}">
         <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:26px">
           <input type="hidden" name="access_key" value="f08b515d-d4c6-4687-a972-f7f17bf55336">
           <input type="hidden" name="subject" value="New message from the KyremWorks portfolio">
@@ -400,7 +400,7 @@
             <span style="font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)">Message</span>
             <textarea required="" name="message" rows="5" placeholder="Tell me about it…" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none;resize:vertical" style-focus="border-color:#514BC4;background:var(--input-focus)"></textarea>
           </label>
-          <div ref="{{ captchaRef }}" style="min-height:78px"></div>
+          <div class="h-captcha" data-captcha="true" style="min-height:78px"></div>
           <sc-if value="{{ captchaError }}" hint-placeholder-val="{{ false }}">
             <p style="font-size:14px;color:#C25A4B;margin-top:-12px">Please complete the captcha before sending.</p>
           </sc-if>
@@ -414,7 +414,7 @@
             </sc-if>
           </div>
         </form>
-      </sc-if>
+      </div>
     </div>
   </section>
 
@@ -453,10 +453,7 @@ class Component extends DCLogic {
 
   constructor(props){
     super(props);
-    this.HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
-    this.captchaRef = React.createRef();
-    this._token = null;
-    this._captchaId = null;
+    this.formWrapRef = React.createRef();
     this.trackRef = React.createRef();
     this.overlayRef = React.createRef();
     this.veilRef = React.createRef();
@@ -480,12 +477,13 @@ class Component extends DCLogic {
     this.applyTheme(saved);
     this.startTypewriter();
     this.startPlayer();
-    this.loadHCaptcha();
+    this.loadWeb3Forms();
   }
 
   componentDidUpdate(){
-    if(!this.state.sent && this.captchaRef.current && this._captchaId == null){
-      this.renderCaptcha();
+    // Keep the form mounted so the hCaptcha widget never has to re-render; just show/hide it.
+    if(this.formWrapRef.current){
+      this.formWrapRef.current.style.display = this.state.sent ? 'none' : 'block';
     }
   }
 
@@ -494,32 +492,15 @@ class Component extends DCLogic {
     if(this._praf) cancelAnimationFrame(this._praf);
   }
 
-  loadHCaptcha(){
-    if(window.hcaptcha){ this.renderCaptcha(); return; }
-    if(document.getElementById('hcaptcha-api')){
-      const iv = setInterval(()=>{ if(window.hcaptcha){ clearInterval(iv); this.renderCaptcha(); } }, 120);
-      return;
-    }
+  loadWeb3Forms(){
+    // Web3Forms zero-config hCaptcha: their script renders the .h-captcha widget
+    // and injects the h-captcha-response field automatically.
+    if(document.getElementById('w3f-client')) return;
     const s = document.createElement('script');
-    s.id = 'hcaptcha-api';
-    s.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+    s.id = 'w3f-client';
+    s.src = 'https://web3forms.com/client/script.js';
     s.async = true; s.defer = true;
-    s.onload = () => this.renderCaptcha();
     document.head.appendChild(s);
-  }
-
-  renderCaptcha(){
-    if(!window.hcaptcha || !this.captchaRef.current || this._captchaId != null) return;
-    const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-    try {
-      this._captchaId = window.hcaptcha.render(this.captchaRef.current, {
-        sitekey: this.HCAPTCHA_SITEKEY,
-        theme,
-        callback: (token) => { this._token = token; this.setState({ captchaError: false }); },
-        'expired-callback': () => { this._token = null; },
-        'error-callback': () => { this._token = null; }
-      });
-    } catch(e) {}
   }
 
   startPlayer(){
@@ -867,7 +848,7 @@ class Component extends DCLogic {
       sending: this.state.sending,
       error: this.state.error,
       captchaError: this.state.captchaError,
-      captchaRef: this.captchaRef,
+      formWrapRef: this.formWrapRef,
       openMenu: () => this.setState({menuOpen:true}),
       closeMenu: () => this.setState({menuOpen:false}),
       thumbEnter: (e)=>{ const o=e.currentTarget.querySelector('[data-ov]'); if(o) o.style.opacity='1'; },
@@ -875,10 +856,10 @@ class Component extends DCLogic {
       submit: async (e) => {
         e.preventDefault();
         if(this.state.sending) return;
-        if(!this._token){ this.setState({ captchaError: true }); return; }
         const form = e.target;
+        const tokenEl = form.querySelector('textarea[name="h-captcha-response"]');
+        if(!tokenEl || !tokenEl.value){ this.setState({ captchaError: true }); return; }
         const fd = new FormData(form);
-        if(!fd.get('h-captcha-response')) fd.append('h-captcha-response', this._token);
         this.setState({ sending: true, error: null, captchaError: false });
         try {
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
@@ -887,18 +868,15 @@ class Component extends DCLogic {
             this.setState({ sent: true, sending: false });
           } else {
             this.setState({ error: data.message || 'Something went wrong. Please try again.', sending: false });
-            if(window.hcaptcha && this._captchaId != null) window.hcaptcha.reset(this._captchaId);
-            this._token = null;
+            if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
           }
         } catch(err) {
-          this.setState({ error: 'Network error — please check your connection and try again.', sending: false });
-          if(window.hcaptcha && this._captchaId != null) window.hcaptcha.reset(this._captchaId);
-          this._token = null;
+          this.setState({ error: 'Network error, please check your connection and try again.', sending: false });
+          if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
         }
       },
       reset: () => {
-        this._token = null;
-        this._captchaId = null;
+        if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
         this.setState({ sent: false, error: null, captchaError: false });
       }
     };
