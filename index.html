@@ -80,6 +80,8 @@
     nav{padding:15px 20px !important}
     #nav-links{display:none !important}
     #nav-burger{display:flex !important}
+    #contact-btn{display:none !important}
+    #nav-right{gap:14px !important}
     header#top{padding:118px 22px 80px !important}
     #about{padding:90px 22px !important}
     #about-grid{grid-template-columns:1fr !important;gap:46px !important}
@@ -110,11 +112,8 @@
 
   <!-- NAV -->
   <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;backdrop-filter:blur(10px);background:var(--nav-bg);border-bottom:1px solid rgba(var(--line-rgb),0.07)">
-    <a href="#top" style="text-decoration:none;color:var(--ink);font-weight:700;font-size:17px;letter-spacing:-0.01em;display:flex;align-items:center;gap:11px">
-      <img src="assets/logo-pfp.png" alt="KyremWorks" style="width:32px;height:32px;border-radius:8px;display:block;image-rendering:pixelated;border:1px solid rgba(var(--line-rgb),0.1)">
-      Kyrem<span style="color:#8A8E98;font-weight:500">Works</span>
-    </a>
-    <div style="display:flex;align-items:center;gap:24px">
+    <a href="#top" style="text-decoration:none;color:var(--ink);font-weight:700;font-size:17px;letter-spacing:-0.01em">Kyrem<span style="color:#8A8E98;font-weight:500">Works</span></a>
+    <div id="nav-right" style="display:flex;align-items:center;gap:24px">
       <div id="nav-links" style="display:flex;align-items:center;gap:28px">
         <a href="#about" style="text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;letter-spacing:0.01em">About</a>
         <a href="#work" style="text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;letter-spacing:0.01em">Games</a>
@@ -142,7 +141,7 @@
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:38px">
           <span style="display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px">
             <img src="assets/logo-pfp.png" alt="" style="width:28px;height:28px;border-radius:7px;image-rendering:pixelated;border:1px solid rgba(var(--line-rgb),0.1)">
-            Kyrem<span style="color:#8A8E98;font-weight:500">Works</span>
+            <span>Kyrem<span style="color:#8A8E98;font-weight:500">Works</span></span>
           </span>
           <button onClick="{{ closeMenu }}" aria-label="Close menu" style="width:40px;height:40px;border:1px solid rgba(var(--line-rgb),0.18);border-radius:10px;background:transparent;cursor:pointer;font-size:20px;color:var(--ink);line-height:1;display:flex;align-items:center;justify-content:center">×</button>
         </div>
@@ -351,7 +350,7 @@
         <a href="https://www.youtube.com/@KyremWorks" target="_blank" rel="noopener" style="margin-top:10px;text-decoration:none;align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:14px 26px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease" style-hover="transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92">▶ @KyremWorks on YouTube</a>
       </div>
       <a href="https://www.youtube.com/@KyremWorks/videos" target="_blank" rel="noopener" onMouseEnter="{{ thumbEnter }}" onMouseLeave="{{ thumbLeave }}" style="text-decoration:none;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#16171C;display:block;border:1px solid rgba(var(--line-rgb),0.1)">
-        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="kw-last-video" shape="rect" fit="cover" placeholder="Drop your latest video thumbnail" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+        <img src="assets/last-video.png" alt="Latest KyremWorks video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
         <div data-ov="" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,16,20,0.88),rgba(15,16,20,0.1) 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;transition:opacity .25s ease;pointer-events:none">
           <span style="width:72px;height:72px;border-radius:50%;background:#C2942B;color:#15161b;display:flex;align-items:center;justify-content:center;font-size:28px;padding-left:5px;box-shadow:0 12px 40px rgba(194,148,43,0.4)">▶</span>
           <span style="font-family:'Newsreader',serif;font-size:22px;letter-spacing:0.01em;color:#ECEDF0">Watch the last video</span>
@@ -373,28 +372,40 @@
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
         <div style="background:#16171C;color:#ECEDF0;border-radius:16px;padding:60px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px">
           <span style="width:60px;height:60px;border-radius:50%;background:#C2942B;color:#15161b;display:flex;align-items:center;justify-content:center;font-size:28px">✓</span>
-          <h3 style="font-family:'Newsreader',serif;font-size:30px;font-weight:400">Message sent</h3>
-          <p style="font-size:16px;color:#A6AAB4;max-width:38ch">Thanks for reaching out — I'll get back to you soon. (Demo form, nothing was actually sent.)</p>
+          <h3 style="font-family:'Newsreader',serif;font-size:30px;font-weight:400">Thanks for reaching out!</h3>
+          <p style="font-size:16px;color:#A6AAB4;max-width:38ch">I'll get back to you within 48 hours.</p>
           <button onClick="{{ reset }}" style="margin-top:8px;background:transparent;border:1px solid rgba(236,237,240,0.3);color:#ECEDF0;font-size:14px;font-weight:600;padding:11px 22px;border-radius:100px;cursor:pointer">Send another</button>
         </div>
       </sc-if>
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:26px">
+          <input type="hidden" name="access_key" value="f08b515d-d4c6-4687-a972-f7f17bf55336">
+          <input type="hidden" name="subject" value="New message from the KyremWorks portfolio">
+          <input type="hidden" name="from_name" value="KyremWorks Portfolio">
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
           <div id="contact-form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:26px">
             <label style="display:flex;flex-direction:column;gap:10px">
               <span style="font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)">Name</span>
-              <input required="" type="text" placeholder="Your name" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none" style-focus="border-color:#514BC4;background:var(--input-focus)">
+              <input required="" name="name" type="text" placeholder="Your name" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none" style-focus="border-color:#514BC4;background:var(--input-focus)">
             </label>
             <label style="display:flex;flex-direction:column;gap:10px">
               <span style="font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)">Email</span>
-              <input required="" type="email" placeholder="you@email.com" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none" style-focus="border-color:#514BC4;background:var(--input-focus)">
+              <input required="" name="email" type="email" placeholder="you@email.com" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none" style-focus="border-color:#514BC4;background:var(--input-focus)">
             </label>
           </div>
           <label style="display:flex;flex-direction:column;gap:10px">
             <span style="font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)">Message</span>
-            <textarea required="" rows="5" placeholder="Tell me about it…" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none;resize:vertical" style-focus="border-color:#514BC4;background:var(--input-focus)"></textarea>
+            <textarea required="" name="message" rows="5" placeholder="Tell me about it…" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none;resize:vertical" style-focus="border-color:#514BC4;background:var(--input-focus)"></textarea>
           </label>
-          <button type="submit" style="align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease" style-hover="transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92">Send message</button>
+          <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px;color:#C25A4B;margin-top:-12px">{{ error }}</p>
+          </sc-if>
+          <div style="display:flex;align-items:center;gap:18px">
+            <button type="submit" disabled="{{ sending }}" style="align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease" style-hover="transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92">Send message</button>
+            <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:14px;color:var(--muted)">Sending…</span>
+            </sc-if>
+          </div>
         </form>
       </sc-if>
     </div>
@@ -404,7 +415,7 @@
   <footer style="background:var(--surface-2);padding:44px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid rgba(var(--line-rgb),0.08)">
     <div style="display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px">
       <img src="assets/logo-pfp.png" alt="KyremWorks" style="width:28px;height:28px;border-radius:7px;display:block;image-rendering:pixelated;border:1px solid rgba(var(--line-rgb),0.1)">
-      Kyrem<span style="color:#8A8E98;font-weight:500">Works</span>
+      <span>Kyrem<span style="color:#8A8E98;font-weight:500">Works</span></span>
     </div>
     <div style="display:flex;gap:24px">
       <a href="https://kyremworks.itch.io" target="_blank" rel="noopener" style="text-decoration:none;color:var(--muted);font-size:14px;font-weight:500">itch.io</a>
@@ -431,7 +442,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { sent: false, menuOpen: false };
+  state = { sent: false, menuOpen: false, sending: false, error: null };
 
   constructor(props){
     super(props);
@@ -807,12 +818,33 @@ class Component extends DCLogic {
       charRef: this.charRef,
       fireRef: this.fireRef,
       glowRef: this.glowRef,
+      sending: this.state.sending,
+      error: this.state.error,
       openMenu: () => this.setState({menuOpen:true}),
       closeMenu: () => this.setState({menuOpen:false}),
       thumbEnter: (e)=>{ const o=e.currentTarget.querySelector('[data-ov]'); if(o) o.style.opacity='1'; },
       thumbLeave: (e)=>{ const o=e.currentTarget.querySelector('[data-ov]'); if(o) o.style.opacity='0'; },
-      submit: (e) => { e.preventDefault(); this.setState({sent:true}); },
-      reset: () => this.setState({sent:false})
+      submit: async (e) => {
+        e.preventDefault();
+        if(this.state.sending) return;
+        const form = e.target;
+        const fd = new FormData(form);
+        this.setState({ sending: true, error: null });
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+          const data = await res.json();
+          if(data.success){
+            this.setState({ sent: true, sending: false });
+          } else {
+            this.setState({ error: data.message || 'Something went wrong. Please try again.', sending: false });
+          }
+        } catch(err) {
+          this.setState({ error: 'Network error — please check your connection and try again.', sending: false });
+        }
+      },
+      reset: () => {
+        this.setState({ sent: false, error: null });
+      }
     };
   }
 }
