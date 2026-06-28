@@ -8,6 +8,9 @@
 <body>
 <x-dc>
 <helmet>
+<title>KyremWorks</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -397,6 +400,10 @@
             <span style="font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)">Message</span>
             <textarea required="" name="message" rows="5" placeholder="Tell me about it…" style="font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none;resize:vertical" style-focus="border-color:#514BC4;background:var(--input-focus)"></textarea>
           </label>
+          <div ref="{{ captchaRef }}" style="min-height:78px"></div>
+          <sc-if value="{{ captchaError }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px;color:#C25A4B;margin-top:-12px">Please complete the captcha before sending.</p>
+          </sc-if>
           <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
             <p style="font-size:14px;color:#C25A4B;margin-top:-12px">{{ error }}</p>
           </sc-if>
@@ -442,10 +449,14 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { sent: false, menuOpen: false, sending: false, error: null };
+  state = { sent: false, menuOpen: false, sending: false, error: null, captchaError: false };
 
   constructor(props){
     super(props);
+    this.HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+    this.captchaRef = React.createRef();
+    this._token = null;
+    this._captchaId = null;
     this.trackRef = React.createRef();
     this.overlayRef = React.createRef();
     this.veilRef = React.createRef();
@@ -469,11 +480,46 @@ class Component extends DCLogic {
     this.applyTheme(saved);
     this.startTypewriter();
     this.startPlayer();
+    this.loadHCaptcha();
+  }
+
+  componentDidUpdate(){
+    if(!this.state.sent && this.captchaRef.current && this._captchaId == null){
+      this.renderCaptcha();
+    }
   }
 
   componentWillUnmount(){
     if(this._tw) clearTimeout(this._tw);
     if(this._praf) cancelAnimationFrame(this._praf);
+  }
+
+  loadHCaptcha(){
+    if(window.hcaptcha){ this.renderCaptcha(); return; }
+    if(document.getElementById('hcaptcha-api')){
+      const iv = setInterval(()=>{ if(window.hcaptcha){ clearInterval(iv); this.renderCaptcha(); } }, 120);
+      return;
+    }
+    const s = document.createElement('script');
+    s.id = 'hcaptcha-api';
+    s.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+    s.async = true; s.defer = true;
+    s.onload = () => this.renderCaptcha();
+    document.head.appendChild(s);
+  }
+
+  renderCaptcha(){
+    if(!window.hcaptcha || !this.captchaRef.current || this._captchaId != null) return;
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    try {
+      this._captchaId = window.hcaptcha.render(this.captchaRef.current, {
+        sitekey: this.HCAPTCHA_SITEKEY,
+        theme,
+        callback: (token) => { this._token = token; this.setState({ captchaError: false }); },
+        'expired-callback': () => { this._token = null; },
+        'error-callback': () => { this._token = null; }
+      });
+    } catch(e) {}
   }
 
   startPlayer(){
@@ -820,6 +866,8 @@ class Component extends DCLogic {
       glowRef: this.glowRef,
       sending: this.state.sending,
       error: this.state.error,
+      captchaError: this.state.captchaError,
+      captchaRef: this.captchaRef,
       openMenu: () => this.setState({menuOpen:true}),
       closeMenu: () => this.setState({menuOpen:false}),
       thumbEnter: (e)=>{ const o=e.currentTarget.querySelector('[data-ov]'); if(o) o.style.opacity='1'; },
@@ -827,9 +875,11 @@ class Component extends DCLogic {
       submit: async (e) => {
         e.preventDefault();
         if(this.state.sending) return;
+        if(!this._token){ this.setState({ captchaError: true }); return; }
         const form = e.target;
         const fd = new FormData(form);
-        this.setState({ sending: true, error: null });
+        if(!fd.get('h-captcha-response')) fd.append('h-captcha-response', this._token);
+        this.setState({ sending: true, error: null, captchaError: false });
         try {
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
           const data = await res.json();
@@ -837,13 +887,19 @@ class Component extends DCLogic {
             this.setState({ sent: true, sending: false });
           } else {
             this.setState({ error: data.message || 'Something went wrong. Please try again.', sending: false });
+            if(window.hcaptcha && this._captchaId != null) window.hcaptcha.reset(this._captchaId);
+            this._token = null;
           }
         } catch(err) {
           this.setState({ error: 'Network error — please check your connection and try again.', sending: false });
+          if(window.hcaptcha && this._captchaId != null) window.hcaptcha.reset(this._captchaId);
+          this._token = null;
         }
       },
       reset: () => {
-        this.setState({ sent: false, error: null });
+        this._token = null;
+        this._captchaId = null;
+        this.setState({ sent: false, error: null, captchaError: false });
       }
     };
   }
