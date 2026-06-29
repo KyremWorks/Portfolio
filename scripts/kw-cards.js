@@ -23,6 +23,7 @@
         desc: "A short stealth platformer I made for the Brackeys 2026.1 Jam, with a bit of The Little Prince in it. You hide in the shadows while the Lamplighter's light is on and run when it goes dark. The goal is simple: get home.",
         tags: ["Brackeys 2026.1", "#264 / 1320", "Pixel art"],
         link: "https://kyremworks.itch.io/a-lamplighters-destiny",
+        linkMsg: "Play on itch.io",
         img: "assets/lamplighter.png",
         previewGif: "assets/gameplay-lamplighter.gif"
       },
@@ -32,8 +33,19 @@
         desc: "You stole a hotdog and now a giant hand wants it back. It's fast. You play Frank, a truck driver running and jumping past traps to get away. It's still a prototype, and I keep adding to it with every devlog.",
         tags: ["In development", "Long-term"],
         link: "https://kyremworks.itch.io/grand-theft-hotdog",
+        linkMsg: "Play on itch.io",
         img: "assets/gth.png",
         previewGif: "assets/gameplay-gth.gif"
+      },
+      {
+        title: "EndlessHorizons",
+        kind: "Long-term",
+        desc: "A realistic real-world Minecraft server I've been working on for 5 years. I started out as a builder, but eventually took over the technical side. Today I co-own it: I manage our self-hosted Ubuntu VPS, code custom plugins, and define the project's roadmap.",
+        tags: ["In development", "Long-term", "Ubuntu Server", "5 years"],
+        link: "glitchvalley.it",
+        linkMsg: "Learn more",
+        img: "https://glitchvalley.it/images/logo.png",
+        previewGif: ""
       }
     ],
     commissions: [
@@ -79,12 +91,17 @@
     var underlay = project.previewGif
       ? React.createElement('img', { key: 'v', 'data-gif': true, src: project.previewGif, alt: project.title + ' gameplay', style: Object.assign({}, FILL, { position: 'absolute', inset: 0 }) })
       : React.createElement('video', { key: 'v', 'data-src': project.preview, loop: true, muted: true, playsInline: true, preload: 'none', onPlaying: onPlaying, style: Object.assign({}, FILL, { position: 'absolute', inset: 0 }) });
+    
+    var hasPreviewGif = project.previewGif && project.previewGif !== ""
+    var hoverBadgeElement = hasPreviewGif ? React.createElement('div', { key: 'h', 'data-badge': true, style: badgeStyle }, '▶  Hover to play') : null;
+    
 
     return React.createElement('div', { onMouseEnter: play, onMouseLeave: stop, style: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' } },
       underlay,
       React.createElement('img', { key: 'p', 'data-poster': true, src: project.img, alt: project.title, style: Object.assign({}, FILL, { position: 'absolute', inset: 0, transition: 'opacity .3s ease', zIndex: 2 }) }),
-      React.createElement('div', { key: 'h', 'data-badge': true, style: badgeStyle }, '▶  Hover to play')
+      hoverBadgeElement
     );
+
   }
 
   // ---- Commission media: static image, or a hover-played video with poster ----
