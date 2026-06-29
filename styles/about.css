@@ -1,0 +1,39 @@
+/* About: a story column beside a git-style "commit tree" timeline drawn with
+   an inline SVG. Theme-aware strokes/fills use the --tl-* tokens. */
+
+#about{max-width:1200px;margin:0 auto;padding:120px 40px}
+.about-head{margin-bottom:70px}
+#about-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:80px;align-items:start}
+
+/* ---- Story column ---- */
+.about-story{display:flex;flex-direction:column;gap:24px;max-width:31em}
+.about-lead{font-family:'Newsreader',serif;font-size:clamp(23px,2.5vw,31px);line-height:1.4;font-weight:400;color:var(--ink);text-wrap:pretty}
+.about-text{font-size:16px;line-height:1.75;color:var(--muted);text-wrap:pretty}
+.about-meta{display:flex;align-items:center;gap:12px;margin-top:8px;font-size:13px;color:#9A9EA8;font-family:ui-monospace,'SF Mono',Menlo,monospace}
+.about-meta-dot{opacity:0.5}
+.about-link{margin-top:10px;align-self:flex-start;text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(var(--line-rgb),0.3);padding-bottom:3px;transition:gap .25s ease}
+.about-link:hover{gap:12px}
+.about-link-arrow{color:#C2942B}
+
+/* ---- Commit-tree timeline ---- */
+.timeline{position:relative;min-height:480px;padding-top:6px}
+.timeline-svg{position:absolute;left:0;top:0;overflow:visible}
+/* Theme-aware trunk and commit nodes (literal-colour branch/HEAD strokes stay
+   as SVG presentation attributes in the markup). */
+.tl-line{stroke:var(--tl-line)}
+.tl-node{fill:var(--tl-node)}
+.tl-hollow{fill:var(--tl-hollow)}
+
+/* Each labelled commit is absolutely placed to line up with its SVG node. */
+.timeline-entry{position:absolute;left:92px;transform:translateY(-50%)}
+.timeline-entry:nth-child(2){top:70px}
+.timeline-entry:nth-child(3){top:180px}
+.timeline-entry:nth-child(4){top:290px}
+.timeline-entry:nth-child(5){top:400px}
+.timeline-row{display:flex;align-items:center;gap:8px}
+.timeline-year{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;letter-spacing:0.05em;color:#C2942B}
+.timeline-year--branch{color:#514BC4}
+.timeline-tag{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10px;font-weight:600;letter-spacing:0.04em;color:#514BC4;border:1px solid rgba(81,75,196,0.35);border-radius:5px;padding:1px 6px}
+.timeline-tag--head{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;color:#fff;background:#C2942B;border-radius:5px;padding:2px 7px}
+.timeline-title{font-family:'Newsreader',serif;font-size:20px;line-height:1.25;color:var(--ink);margin-top:3px}
+.timeline-desc{font-size:13px;line-height:1.5;color:#9A9EA8;margin-top:3px}

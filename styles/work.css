@@ -1,0 +1,47 @@
+/* Selected work: a dark, horizontally-scrolling carousel of project cards
+   followed by a draggable pixel-art player sprite and a contact CTA.
+   This section is dark by design in both themes, so colours are literal. */
+
+#work{padding:120px 0 130px;background:#16171C;color:#ECEDF0;position:relative}
+#work-head{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:54px}
+/* Gold/light variants of the shared section header on this dark background. */
+#work .section-index{color:#D9AE45}
+#work .section-heading{color:#F5F6F8}
+
+/* ---- Card carousel ---- */
+.work-track{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 40px 30px;scrollbar-width:none;scroll-padding-left:40px}
+
+.project-card{scroll-snap-align:start;flex:0 0 clamp(320px,46vw,560px);background:#1F2027;border:1px solid rgba(236,237,240,0.1);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.project-card:hover{transform:translateY(-5px);border-color:rgba(236,237,240,0.24);box-shadow:0 20px 44px -22px rgba(0,0,0,0.65)}
+.project-card img{transition:transform .45s ease}
+.project-card:hover img{transform:scale(1.04)}
+.project-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0F1014}
+.project-badge{position:absolute;top:16px;left:16px;background:rgba(15,16,20,0.78);backdrop-filter:blur(4px);color:#ECEDF0;font-size:12px;font-weight:600;letter-spacing:0.06em;padding:6px 12px;border-radius:100px}
+.project-body{padding:30px 30px 32px;display:flex;flex-direction:column;gap:14px;flex:1}
+.project-title{font-family:'Newsreader',serif;font-weight:400;font-size:28px;letter-spacing:-0.01em;color:#F5F6F8}
+.project-desc{font-size:15px;line-height:1.6;color:#A6AAB4;flex:1}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tag{font-size:12px;font-weight:600;letter-spacing:0.03em;color:#D9AE45;border:1px solid rgba(217,174,69,0.4);padding:5px 11px;border-radius:100px}
+.project-link{margin-top:14px;text-decoration:none;color:#ECEDF0;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;border-bottom:1px solid rgba(236,237,240,0.3);padding-bottom:3px}
+.project-link-arrow{color:#D9AE45}
+
+/* Dashed "more on itch.io" card pinned to the end of the carousel. */
+.end-card{scroll-snap-align:start;flex:0 0 clamp(260px,32vw,360px);text-decoration:none;border:1px dashed rgba(236,237,240,0.28);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#ECEDF0;text-align:center;padding:40px;transition:border-color .28s ease,transform .28s ease,background .28s ease}
+.end-card:hover{border-color:rgba(236,237,240,0.55);transform:translateY(-4px);background:rgba(236,237,240,0.03)}
+.end-card-icon{width:54px;height:54px;border-radius:50%;border:1px solid rgba(236,237,240,0.3);display:flex;align-items:center;justify-content:center;font-size:22px}
+.end-card-title{font-family:'Newsreader',serif;font-size:22px}
+.end-card-sub{font-size:14px;color:#A6AAB4}
+
+/* ---- Player sprite + contact CTA ---- */
+.work-outro{max-width:600px;margin:60px auto 0;padding:0 40px}
+/* Stage the sprite walks across; the sprite's position/frame are driven
+   imperatively by scripts/kw-player.js — only its initial frame lives here. */
+.player-stage{position:relative;height:80px;pointer-events:none;z-index:2}
+.player-sprite{position:absolute;left:0;bottom:0;width:76px;height:76px;background-image:url(../assets/player-sheet-sm.png);background-repeat:no-repeat;background-size:2280px 76px;background-position:0 0;image-rendering:pixelated;transform-origin:50% 100%;will-change:transform;cursor:grab;pointer-events:auto;touch-action:none}
+
+.work-contact{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;text-decoration:none;background:rgba(129,108,235,0.1);border:1px solid rgba(150,138,235,0.32);border-radius:18px;padding:30px 34px;transition:border-color .3s ease,transform .3s ease,background .3s ease}
+.work-contact:hover{border-color:rgba(150,138,235,0.55);background:rgba(129,108,235,0.15);transform:translateY(-3px)}
+.work-contact-title{font-family:'Newsreader',serif;font-size:clamp(22px,2.6vw,28px);line-height:1.25;color:#F5F6F8}
+.work-contact-desc{font-size:15px;line-height:1.55;color:#A6AAB4;max-width:40ch}
+.work-contact-btn{margin-top:4px;display:inline-flex;align-items:center;gap:9px;background:rgba(150,138,235,0.16);border:1px solid rgba(150,138,235,0.42);color:#ECEDF0;font-size:15px;font-weight:600;padding:12px 24px;border-radius:100px}
+.work-contact-arrow{color:#B9AEF2}

@@ -1,0 +1,27 @@
+/* Narrow-viewport overrides. Loaded last so these win over the section files.
+   Below 860px the desktop nav collapses to the burger/drawer and every grid
+   stacks to a single column. */
+
+@media (max-width:860px){
+  .site-nav{padding:15px 20px !important}
+  #nav-links{display:none !important}
+  #nav-burger{display:flex !important}
+  #contact-btn{display:none !important}
+  #nav-right{gap:14px !important}
+  .hero{padding:118px 22px 80px !important}
+  #about{padding:90px 22px !important}
+  #about-grid{grid-template-columns:1fr !important;gap:46px !important}
+  #work{padding:90px 0 100px !important}
+  #work-head{padding:0 22px !important}
+  #pixelart{padding:90px 22px !important}
+  #pixel-head{flex-direction:column;align-items:flex-start !important;gap:18px !important}
+  #pixelart-grid{grid-template-columns:1fr !important}
+  #channel{padding:90px 22px !important}
+  #channel-grid{grid-template-columns:1fr !important;gap:36px !important}
+  #contact-inner{padding:90px 22px 100px !important}
+  #contact-form-row{grid-template-columns:1fr !important}
+  .site-footer{padding:32px 22px !important}
+}
+@media (max-width:560px){
+  #work .project-card{flex-basis:84vw !important}
+}

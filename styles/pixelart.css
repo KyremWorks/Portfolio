@@ -1,0 +1,19 @@
+/* Pixel art: a two-column grid of commission "concept study" figures, each a
+   dark card with a media area, a corner label, and a caption. */
+
+#pixelart{max-width:1200px;margin:0 auto;padding:120px 40px}
+#pixel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:18px}
+.fiverr-link{text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;border:1px solid rgba(var(--line-rgb),0.2);padding:11px 22px;border-radius:100px;display:inline-flex;align-items:center;gap:9px;transition:background .25s ease,transform .25s ease,border-color .25s ease}
+.fiverr-link:hover{background:rgba(var(--line-rgb),0.07);transform:translateY(-2px);border-color:rgba(var(--line-rgb),0.34)}
+.fiverr-link-arrow{color:#C2942B}
+.pixelart-intro{font-size:17px;line-height:1.6;color:var(--muted);max-width:54ch;margin-bottom:50px}
+
+#pixelart-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.commission-figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid rgba(var(--line-rgb),0.1);background:#16171C;position:relative;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.commission-figure:hover{transform:translateY(-5px);border-color:rgba(var(--line-rgb),0.24);box-shadow:0 20px 44px -24px rgba(0,0,0,0.4)}
+.commission-figure img{transition:transform .5s ease}
+.commission-figure:hover img{transform:scale(1.05)}
+.commission-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0F1014}
+.commission-label{position:absolute;top:14px;left:14px;background:rgba(15,16,20,0.78);backdrop-filter:blur(4px);color:#D9AE45;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+.commission-caption{padding:18px 22px;font-size:15px;font-weight:600;color:#ECEDF0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.commission-note{font-size:13px;color:#7C808A;font-weight:500}
