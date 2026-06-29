@@ -1,0 +1,62 @@
+/* Chrome that frames every page: fixed top nav, the mobile slide-in drawer,
+   and the footer. Section-specific styling lives in its own stylesheet. */
+
+/* ---- Top navigation ---- */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;backdrop-filter:blur(10px);background:var(--nav-bg);border-bottom:1px solid rgba(var(--line-rgb),0.07)}
+.nav-brand{text-decoration:none;color:var(--ink);font-weight:700;font-size:17px;letter-spacing:-0.01em}
+/* The muted "Works" half of the wordmark, reused in the drawer and footer. */
+.brand-sub{color:#8A8E98;font-weight:500}
+#nav-right{display:flex;align-items:center;gap:24px}
+
+#nav-links{display:flex;align-items:center;gap:28px}
+#nav-links a{position:relative;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;letter-spacing:0.01em;transition:color .22s ease}
+/* Underline that wipes in from the left on hover. */
+#nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .26s cubic-bezier(.4,0,.2,1)}
+#nav-links a:hover{color:var(--ink)}
+#nav-links a:hover::after{transform:scaleX(1)}
+
+/* Theme toggle: the moon/sun icons are stacked and cross-fade + rotate based
+   on the active theme (and lean further on hover). */
+#theme-toggle{position:relative;overflow:hidden;width:42px;height:42px;border:1px solid rgba(var(--line-rgb),0.18);border-radius:11px;background:transparent;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .25s ease,border-color .25s ease}
+#theme-toggle:hover{background:rgba(var(--line-rgb),0.09);border-color:rgba(var(--line-rgb),0.42)}
+#theme-toggle svg{position:absolute;top:50%;left:50%;transition:opacity .5s ease,transform .55s cubic-bezier(.34,1.35,.5,1)}
+#theme-toggle .icon-moon{transform:translate(-50%,-50%) rotate(0deg) scale(1);opacity:1}
+#theme-toggle .icon-sun{transform:translate(-50%,-50%) rotate(-90deg) scale(0.4);opacity:0}
+html[data-theme="dark"] #theme-toggle .icon-moon{transform:translate(-50%,-50%) rotate(90deg) scale(0.4);opacity:0}
+html[data-theme="dark"] #theme-toggle .icon-sun{transform:translate(-50%,-50%) rotate(0deg) scale(1);opacity:1}
+#theme-toggle:hover .icon-moon{transform:translate(-50%,-50%) rotate(-16deg) scale(1.16)}
+html[data-theme="dark"] #theme-toggle:hover .icon-sun{transform:translate(-50%,-50%) rotate(42deg) scale(1.16)}
+
+#contact-btn{text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;letter-spacing:0.01em;border:1px solid rgba(var(--line-rgb),0.18);padding:8px 16px;border-radius:100px;transition:background .3s ease,color .3s ease,border-color .3s ease}
+#contact-btn:hover{background:#2b2c33 !important;border-color:#2b2c33 !important;color:#ffffff !important}
+html[data-theme="dark"] #contact-btn:hover{background:#ECEDF0 !important;border-color:#ECEDF0 !important;color:#16171C !important}
+
+/* Hidden on desktop; the responsive stylesheet flips it to flex under 860px. */
+#nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:42px;height:42px;border:1px solid rgba(var(--line-rgb),0.18);border-radius:11px;background:transparent;cursor:pointer;padding:0;color:var(--ink)}
+.nav-burger-bar{display:block;width:18px;height:2px;background:currentColor;border-radius:2px}
+
+/* ---- Mobile slide-in drawer (rendered only when menuOpen) ---- */
+.mobile-drawer{position:fixed;inset:0;z-index:100}
+.drawer-scrim{position:absolute;inset:0;background:rgba(10,10,16,0.5);backdrop-filter:blur(2px);animation:kw-fade-in .2s ease}
+.drawer-panel{position:absolute;top:0;right:0;height:100%;width:min(82vw,330px);background:var(--surface-2);box-shadow:-20px 0 60px rgba(var(--line-rgb),0.2);display:flex;flex-direction:column;padding:24px 26px 30px;animation:kw-drawer-in .26s cubic-bezier(.2,.7,.3,1)}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}
+.drawer-close{width:40px;height:40px;border:1px solid rgba(var(--line-rgb),0.18);border-radius:10px;background:transparent;cursor:pointer;font-size:20px;color:var(--ink);line-height:1;display:flex;align-items:center;justify-content:center}
+.drawer-nav{display:flex;flex-direction:column}
+.drawer-link{text-decoration:none;color:var(--ink);font-family:'Newsreader',serif;font-size:27px;padding:15px 0;border-bottom:1px solid rgba(var(--line-rgb),0.08)}
+.drawer-link:last-child{border-bottom:none}
+.drawer-socials{margin-top:auto;display:flex;gap:22px;padding-top:30px}
+.drawer-social{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600}
+
+/* ---- Footer ---- */
+.site-footer{background:var(--surface-2);padding:44px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid rgba(var(--line-rgb),0.08)}
+.site-footer a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s ease}
+.site-footer a:hover{color:var(--ink)}
+.footer-links{display:flex;gap:24px}
+.footer-copy{font-size:13px;color:#9A9EA8}
+
+/* ---- Shared wordmark lockup (drawer header + footer) ---- */
+.brand-lockup{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.brand-mark{width:28px;height:28px;border-radius:7px;display:block;image-rendering:pixelated;border:1px solid rgba(var(--line-rgb),0.1)}
+
+@keyframes kw-drawer-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes kw-fade-in{from{opacity:0}to{opacity:1}}

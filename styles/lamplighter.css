@@ -1,0 +1,13 @@
+/* Full-screen overlay played during a theme switch: a lamplighter walks in and
+   lights (or dims) a lamp. All sprite frames, opacities and the fire image are
+   driven imperatively by scripts/kw-lamplighter.js; only the initial/resting
+   state lives here. */
+
+.lamplighter-overlay{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:0;visibility:hidden;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.lamplighter-veil{position:absolute;inset:0;background:radial-gradient(130% 95% at 50% 100%,#1a1830 0%,#0b0a12 72%);opacity:0}
+.lamplighter-scene{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;display:flex;align-items:flex-end;justify-content:center}
+.lamplighter-char{position:relative;z-index:3;width:200px;height:200px;background-image:url(../assets/lamplighter-sheet.png);background-repeat:no-repeat;background-size:2200px 200px;background-position:0 0;image-rendering:pixelated;margin-right:-30px;margin-bottom:8px}
+.lamplighter-lamp-wrap{position:relative;z-index:2}
+.lamplighter-glow{position:absolute;left:65px;top:118px;width:500px;height:500px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(233,196,96,0.55),rgba(233,196,96,0.12) 44%,transparent 68%);opacity:0;pointer-events:none;z-index:1}
+.lamplighter-lamp{position:relative;z-index:2;width:130px;height:520px;background-image:url(../assets/lamp-sheet.png);background-repeat:no-repeat;background-size:1950px 520px;background-position:0 0;image-rendering:pixelated}
+.lamplighter-fire{position:absolute;z-index:3;top:92px;left:46px;width:38px;height:38px;background-image:url(../assets/fire1.png);background-size:contain;background-repeat:no-repeat;image-rendering:pixelated;opacity:0;pointer-events:none}

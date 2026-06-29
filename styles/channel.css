@@ -1,0 +1,27 @@
+/* Channel: a copy column beside a YouTube thumbnail whose dark overlay fades
+   in on hover (toggled by the thumbEnter/thumbLeave handlers via [data-ov]). */
+
+#channel{max-width:1200px;margin:0 auto;padding:120px 40px 120px;border-top:1px solid rgba(var(--line-rgb),0.08)}
+.channel-head{margin-bottom:54px}
+#channel-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center}
+
+/* ---- Copy column ---- */
+.channel-copy{display:flex;flex-direction:column;gap:26px}
+.channel-lead{font-family:'Newsreader',serif;font-size:clamp(22px,2.4vw,30px);line-height:1.4;font-weight:400;color:var(--ink)}
+.channel-text{font-size:16px;line-height:1.7;color:var(--muted)}
+.channel-meta{display:flex;align-items:center;gap:12px;margin-top:2px;font-size:13px;color:#8A8E98;font-family:ui-monospace,'SF Mono',Menlo,monospace}
+.channel-meta-dot{opacity:0.5}
+.channel-btn{margin-top:10px;text-decoration:none;align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:14px 26px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+.channel-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92}
+
+/* ---- Video thumbnail ---- */
+.video-thumb{text-decoration:none;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#16171C;display:block;border:1px solid rgba(var(--line-rgb),0.1)}
+.video-thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.video-thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,16,20,0.88),rgba(15,16,20,0.1) 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;transition:opacity .25s ease;pointer-events:none}
+.video-thumb-play{width:72px;height:72px;border-radius:50%;background:#C2942B;color:#15161b;display:flex;align-items:center;justify-content:center;font-size:28px;padding-left:5px;box-shadow:0 12px 40px rgba(194,148,43,0.4)}
+.video-thumb-cta{font-family:'Newsreader',serif;font-size:22px;letter-spacing:0.01em;color:#ECEDF0}
+.video-thumb-badge{position:absolute;top:14px;left:14px;z-index:2;background:rgba(15,16,20,0.7);backdrop-filter:blur(4px);color:#ECEDF0;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 11px;border-radius:100px;pointer-events:none}
+
+/* Sizing for an x-import'd media slot, were one ever dropped into the grid. */
+#channel-grid a > .sc-host-x{position:absolute;inset:0;width:100%;height:100%}
+#channel-grid image-slot{display:block !important;width:100% !important;height:100% !important}

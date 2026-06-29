@@ -1,0 +1,51 @@
+/* Foundations: reset, theme tokens, fixed background layers, page shell.
+   Loaded first so every later stylesheet can rely on the custom properties
+   and keyframes declared here. */
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);transition:background-color .5s ease}
+::selection{background:#514BC4;color:#fff}
+
+/* Light is the default theme; dark is opted into via html[data-theme="dark"].
+   The same token names are mirrored in scripts/kw-theme.js, which tweens these
+   values inline on :root during the lamplighter transition — keep both in sync. */
+:root{
+  --bg:#ECEDF0; --surface-1:#F5F6F8; --surface-2:#ECEDF0;
+  --ink:#16171C; --muted:#54585F;
+  --line-rgb:22,23,28;
+  --nav-bg:rgba(236,237,240,0.72);
+  --btn-bg:#16171C; --btn-fg:#ECEDF0;
+  --input-focus:#fff;
+  --tl-line:rgba(22,23,28,0.22); --tl-node:#16171C; --tl-hollow:#fff;
+}
+html[data-theme="dark"]{
+  --bg:#111019; --surface-1:#16141f; --surface-2:#1a1825;
+  --ink:#ECEDF0; --muted:#A7AAB6;
+  --line-rgb:236,237,240;
+  --nav-bg:rgba(16,15,24,0.74);
+  --btn-bg:#ECEDF0; --btn-fg:#16171C;
+  --input-focus:#23212e;
+  --tl-line:rgba(236,237,240,0.26); --tl-node:#ECEDF0; --tl-hollow:#111019;
+}
+
+/* Three stacked fixed layers behind the page: flat colour, scrolling night
+   sky, ambient glow. #night-sky starts hidden and is revealed in dark mode
+   (its opacity is also animated by the theme transition, hence the base 0). */
+#base-bg{position:fixed;inset:0;z-index:-3;pointer-events:none;background:var(--bg)}
+#night-sky{position:fixed;inset:0;z-index:-2;pointer-events:none;background:#1b1a28 url(../assets/night-sky.png) repeat-x;background-size:auto 100%;image-rendering:pixelated;opacity:0;animation:kw-sky 80s linear infinite}
+html[data-theme="dark"] #night-sky{opacity:.92}
+#glow{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(680px 520px at 10% 14%,rgba(129,108,235,0.16),transparent 68%),radial-gradient(600px 460px at 92% 26%,rgba(232,121,194,0.13),transparent 70%),radial-gradient(620px 560px at 74% 80%,rgba(129,108,235,0.12),transparent 72%),radial-gradient(540px 460px at 18% 90%,rgba(236,150,200,0.10),transparent 70%)}
+html[data-theme="dark"] #glow{mix-blend-mode:screen}
+
+@keyframes kw-sky{from{background-position:0 0}to{background-position:-1920px 0}}
+
+/* Page shell — the single wrapper that sets the base text colour and font. */
+.site{color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+
+/* Section header pattern shared by every numbered section (01..05): a small
+   gold index beside a serif heading. Per-section files override the index/
+   heading colour (e.g. the dark Work section) and the surrounding margin. */
+.section-head{display:flex;align-items:baseline;gap:14px}
+.section-index{font-size:13px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#C2942B}
+.section-heading{font-family:'Newsreader',serif;font-weight:400;font-size:clamp(30px,4vw,46px);letter-spacing:-0.02em;color:var(--ink)}

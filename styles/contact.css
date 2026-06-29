@@ -1,0 +1,33 @@
+/* Contact: the message form plus the post-submit "sent" confirmation card.
+   The form stays mounted while sent (toggled via display) so the hCaptcha
+   widget never has to re-render — see componentDidUpdate in the logic. */
+
+#contact{background:var(--surface-1);border-top:1px solid rgba(var(--line-rgb),0.08)}
+#contact-inner{max-width:980px;margin:0 auto;padding:120px 40px 130px}
+.contact-head{margin-bottom:18px}
+/* This section's heading runs larger than the shared default. */
+#contact .section-heading{font-size:clamp(32px,5vw,58px)}
+.contact-intro{font-size:17px;line-height:1.6;color:var(--muted);max-width:50ch;margin-bottom:50px}
+
+/* ---- Sent confirmation ---- */
+.sent-state{background:#16171C;color:#ECEDF0;border-radius:16px;padding:60px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.sent-icon{width:60px;height:60px;border-radius:50%;background:#C2942B;color:#15161b;display:flex;align-items:center;justify-content:center;font-size:28px}
+.sent-title{font-family:'Newsreader',serif;font-size:30px;font-weight:400}
+.sent-text{font-size:16px;color:#A6AAB4;max-width:38ch}
+.sent-again{margin-top:8px;background:transparent;border:1px solid rgba(236,237,240,0.3);color:#ECEDF0;font-size:14px;font-weight:600;padding:11px 22px;border-radius:100px;cursor:pointer}
+
+/* ---- Form ---- */
+.contact-form{display:flex;flex-direction:column;gap:26px}
+.form-botcheck{display:none}
+#contact-form-row{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.form-field{display:flex;flex-direction:column;gap:10px}
+.field-label{font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)}
+.field-input{font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none}
+.field-input:focus{border-color:#514BC4;background:var(--input-focus)}
+textarea.field-input{resize:vertical}
+.h-captcha{min-height:78px}
+.form-error{font-size:14px;color:#C25A4B;margin-top:-12px}
+.form-actions{display:flex;align-items:center;gap:18px}
+.form-submit{align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92}
+.form-sending{font-size:14px;color:var(--muted)}
