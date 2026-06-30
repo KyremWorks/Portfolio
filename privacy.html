@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy - KyremWorks</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="stylesheet" href="styles/fonts.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/layout.css">
+<link rel="stylesheet" href="styles/privacy.css">
+<link rel="stylesheet" href="styles/responsive.css">
+<script>
+  (function(){
+    try {
+      if (localStorage.getItem('kw-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+    } catch(_) {}
+  })();
+</script>
+</head>
+<body>
+<div class="site">
+
+  <div id="base-bg" aria-hidden="true"></div>
+  <div id="night-sky" aria-hidden="true"></div>
+  <div id="glow" aria-hidden="true"></div>
+
+  <!-- NAV (simplified: no theme toggle / burger, those need the DC runtime) -->
+  <nav class="site-nav">
+    <div class="brand-lockup">
+      <img src="assets/logo-pfp.png" alt="KyremWorks" class="brand-mark">
+      <span>Kyrem<span class="brand-sub">Works</span></span>
+    </div>
+    <div id="nav-right">
+      <a id="home-btn" href="../Portfolio/index.html">
+        <svg class="home-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path fill="currentColor" d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
+      </a>
+      <a id="contact-btn" href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- PRIVACY POLICY -->
+  <main id="privacy-main">
+    <div id="privacy-inner">
+      <div class="privacy-head">
+        <h1 class="privacy-title">Privacy Policy</h1>
+        <p class="privacy-updated">Last updated: June 30, 2026</p>
+      </div>
+
+      <nav id="privacy-toc" aria-label="Table of contents">
+        <a href="#data-controller">1. Data controller</a>
+        <a href="#data-collected">2. Data we collect</a>
+        <a href="#legal-basis">3. Legal basis</a>
+        <a href="#purposes">4. Purposes</a>
+        <a href="#third-parties">5. Third parties</a>
+        <a href="#international-transfers">6. International transfers</a>
+        <a href="#your-rights">7. Your rights</a>
+        <a href="#changes">8. Changes</a>
+        <a href="#effective-date">9. Effective date</a>
+      </nav>
+
+      <article id="privacy-body">
+        <section id="data-controller">
+          <h2>1. Who is the data controller</h2>
+          <p>This site (kyremworks.github.io) is a personal portfolio run by <strong>KyremWorks</strong>, an independent developer based in Italy. The site is not operated by a registered company: the data controller under Regulation (EU) 2016/679 (GDPR) is the individual operating under the name "KyremWorks".</p>
+          <p><strong>Contact:</strong> <a href="mailto:kyremworks.contact@gmail.com">kyremworks.contact@gmail.com</a>, or via the <a href="index.html#contact">contact form</a> on this site.</p>
+        </section>
+
+        <section id="data-collected">
+          <h2>2. What data is processed, and how</h2>
+          <ul>
+            <li><strong>Data you provide voluntarily</strong> through the contact form: name, email address, and the content of your message.</li>
+            <li><strong>Technical data collected automatically:</strong> your IP address and browser/device data, collected by hCaptcha for anti-bot verification (active on every visit to the site, not only when the form is submitted); your IP address and standard request logs collected by our hosting provider (GitHub Pages) and by the CDN that serves the site's technical libraries (unpkg.com) and one portfolio project image (glitchvalley.it).</li>
+            <li><strong>Local preference:</strong> your light/dark theme choice is saved in your browser's <code>localStorage</code>. It stays on your device, is never sent to us, and is not a cookie.</li>
+            <li>This site does <strong>not</strong> use any analytics, statistics, or profiling tools (no Google Analytics or similar), and does not send marketing emails.</li>
+          </ul>
+          <p><strong>Retention:</strong> messages sent through the contact form are forwarded to a dedicated inbox and kept there only for as long as needed to read and respond to them; you can request deletion at any time (see "Your rights" below). Web3Forms, the service that delivers the form, does not retain submission content long-term either; see "Third parties" below.</p>
+        </section>
+
+        <section id="legal-basis">
+          <h2>3. Legal basis for processing</h2>
+          <ul>
+            <li><strong>Contact form:</strong> your consent (Art. 6(1)(a) GDPR), freely given by filling in and submitting the form.</li>
+            <li><strong>hCaptcha (anti-spam):</strong> our legitimate interest in protecting the site from abuse and spam (Art. 6(1)(f) GDPR).</li>
+            <li><strong>Hosting/CDN technical logs:</strong> the legitimate interest of the site and of our providers in keeping the site secure, available, and working correctly (Art. 6(1)(f) GDPR).</li>
+            <li><strong>Theme preference:</strong> a technical detail strictly necessary for the interface to work; it stays on your device and doesn't require a specific legal basis.</li>
+          </ul>
+        </section>
+
+        <section id="purposes">
+          <h2>4. Purposes of processing</h2>
+          <ul>
+            <li>Responding to messages, questions, or collaboration requests sent through the contact form.</li>
+            <li>Preventing spam and abuse of the contact form.</li>
+            <li>Keeping the site technically available, secure, and working correctly.</li>
+            <li>Remembering your light/dark theme choice between visits.</li>
+          </ul>
+          <p>No direct marketing, automated profiling, or sale/sharing of data with third parties for their own purposes.</p>
+        </section>
+
+        <section id="third-parties">
+          <h2>5. What third parties have access to your data</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Third party</th><th>What it receives</th><th>When</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Web3Forms</strong></td><td>Name, email, and message submitted through the form</td><td>Only when the contact form is submitted</td></tr>
+                <tr><td><strong>hCaptcha</strong> (Intuition Machines Inc., Miami FL, USA)</td><td>IP address and technical device data, for anti-bot verification</td><td>On every visit to the site (the script loads automatically, not only when the form is used)</td></tr>
+                <tr><td><strong>GitHub Pages</strong> (GitHub, Inc., a Microsoft subsidiary; Fastly CDN)</td><td>IP address and standard request data in access logs (not accessible to us)</td><td>On every visit (hosting)</td></tr>
+                <tr><td><strong>unpkg.com</strong> (Cloudflare / Fly.io infrastructure)</td><td>IP address, to deliver the technical libraries (React, Babel) the site runs on</td><td>On every visit</td></tr>
+                <tr><td><strong>glitchvalley.it</strong></td><td>IP address, when the image for one portfolio project (EndlessHorizons) loads</td><td>On every visit</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Links to <strong>YouTube, itch.io, Instagram, and Fiverr</strong> on this site are plain hyperlinks, not embedded widgets or buttons: no data is sent to those platforms unless you actively click through and leave this site.</p>
+        </section>
+
+        <section id="international-transfers">
+          <h2>6. International data transfers</h2>
+          <p>Some of the providers listed above are based in, or run infrastructure in, the United States (Web3Forms, hCaptcha/Intuition Machines, GitHub Pages, unpkg.com). These transfers outside the EU/EEA rely on the safeguards those providers themselves put in place, typically Standard Contractual Clauses and/or participation in the EU-US Data Privacy Framework where applicable. Please refer to each provider's own privacy policy for up-to-date details: <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">Web3Forms</a>, <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener">hCaptcha</a>, <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub</a>.</p>
+        </section>
+
+        <section id="your-rights">
+          <h2>7. Your rights</h2>
+          <p>Under Articles 15-22 GDPR, you have the right to:</p>
+          <ul>
+            <li>Access the personal data we hold about you;</li>
+            <li>Request its correction or deletion ("right to be forgotten");</li>
+            <li>Request that processing be restricted;</li>
+            <li>Request data portability;</li>
+            <li>Object to processing;</li>
+            <li>Withdraw consent at any time, without affecting the lawfulness of processing carried out before the withdrawal.</li>
+          </ul>
+          <p>You can also lodge a complaint with the Italian Data Protection Authority (<strong>Garante per la protezione dei dati personali</strong>, <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
+          <p><strong>How we actually fulfil these requests:</strong> contact form submissions pass through Web3Forms and land in our own inbox; we don't use a database or separate storage system. If you ask us to access, correct, or delete your data, we search that inbox for messages from you and act on them directly; Web3Forms itself does not keep a long-term copy of submissions on its end (see "Third parties" above). We will respond within the timeframe required by law (normally within one month).</p>
+          <p>To exercise these rights: <a href="mailto:kyremworks.contact@gmail.com">kyremworks.contact@gmail.com</a></p>
+        </section>
+
+        <section id="changes">
+          <h2>8. Changes to this policy</h2>
+          <p>We may update this policy at any time, for example if the site starts using new tools or services. Changes will be published on this same page, with the "last updated" date above revised accordingly. Since this site has no newsletter or user accounts, there is no separate notification system. Please check back here periodically.</p>
+        </section>
+
+        <section id="effective-date">
+          <h2>9. Effective date</h2>
+          <p>Last updated: <strong>June 30, 2026</strong></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="brand-lockup">
+      <img src="assets/logo-pfp.png" alt="KyremWorks" class="brand-mark">
+      <span>Kyrem<span class="brand-sub">Works</span></span>
+    </div>
+    <div class="footer-links">
+      <a href="https://kyremworks.itch.io" target="_blank" rel="noopener">itch.io</a>
+      <a href="https://www.youtube.com/@KyremWorks" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/kyremworks/" target="_blank" rel="noopener">Instagram</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div class="footer-copy">Design with life © 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>

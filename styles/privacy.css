@@ -1,0 +1,40 @@
+/* Privacy policy page: a single readable text column, narrower than the
+   1200px section max-widths elsewhere, since this is long-form prose. */
+
+#privacy-main{display:block}
+#privacy-inner{max-width:760px;margin:0 auto;padding:150px 40px 130px}
+
+.privacy-head{margin-bottom:40px}
+.privacy-title{font-family:'Newsreader',serif;font-weight:400;font-size:clamp(34px,5vw,52px);letter-spacing:-0.02em;color:var(--ink)}
+.privacy-updated{margin-top:10px;font-size:14px;color:var(--muted)}
+
+/* ---- Header ---- */
+#home-btn{position:relative;overflow:hidden;width:42px;height:42px;border:1px solid rgba(var(--line-rgb),0.18);border-radius:11px;background:transparent;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .25s ease,border-color .25s ease}
+#home-btn:hover{background:rgba(var(--line-rgb),0.09);border-color:rgba(var(--line-rgb),0.42)}
+#home-btn.home-icon{position:absolute;top:50%;left:50%;transition:opacity .5s ease,transform .55s cubic-bezier(.34,1.35,.5,1);color: rgb(26, 26, 26);}
+#home-btn:hover .home-icon{transform:translate(-50%,-50%) rotate(-16deg) scale(1.16)}
+#home-btn svg{position:absolute;top:50%;left:50%;transition:opacity .5s ease,transform .55s cubic-bezier(.34,1.35,.5,1); transform: translate(-50%, -50%);}
+
+/* ---- Table of contents ---- */
+#privacy-toc{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:60px;padding-bottom:36px;border-bottom:1px solid rgba(var(--line-rgb),0.1)}
+#privacy-toc a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s ease}
+#privacy-toc a:hover{color:var(--ink)}
+
+/* ---- Body sections ---- */
+#privacy-body section+section{margin-top:52px}
+#privacy-body h2{font-family:'Newsreader',serif;font-weight:400;font-size:clamp(21px,2.4vw,26px);letter-spacing:-0.01em;color:var(--ink);margin-bottom:16px}
+#privacy-body p{font-size:16px;line-height:1.75;color:var(--muted);text-wrap:pretty}
+#privacy-body p+p{margin-top:14px}
+#privacy-body ul{display:flex;flex-direction:column;gap:10px;padding-left:22px;font-size:16px;line-height:1.6;color:var(--muted)}
+#privacy-body ul+p{margin-top:14px}
+#privacy-body strong{color:var(--ink);font-weight:600}
+#privacy-body code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:0.9em;background:var(--surface-2);border-radius:4px;padding:2px 6px}
+#privacy-body a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+#privacy-body a:hover{color:#514BC4}
+
+/* ---- Third-party table ---- */
+.table-wrap{overflow-x:auto;margin:18px 0 22px}
+#privacy-body table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px}
+#privacy-body th,#privacy-body td{text-align:left;padding:10px 14px;border-bottom:1px solid rgba(var(--line-rgb),0.12);vertical-align:top}
+#privacy-body th{font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink)}
+#privacy-body td{color:var(--muted)}

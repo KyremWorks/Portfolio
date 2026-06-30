@@ -19,9 +19,7 @@
 <title>KyremWorks</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/fonts.css">
 <link rel="stylesheet" href="styles/base.css">
 <link rel="stylesheet" href="styles/layout.css">
 <link rel="stylesheet" href="styles/hero.css">
@@ -88,6 +86,7 @@
           <a href="https://kyremworks.itch.io" target="_blank" rel="noopener" class="drawer-social">itch.io ↗</a>
           <a href="https://www.youtube.com/@KyremWorks" target="_blank" rel="noopener" class="drawer-social">YouTube ↗</a>
           <a href="https://www.instagram.com/kyremworks/" target="_blank" rel="noopener" class="drawer-social">Instagram ↗</a>
+          <a href="privacy.html" class="drawer-social">Privacy Policy</a>
         </div>
       </div>
     </div>
@@ -339,6 +338,7 @@
           <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
             <p class="form-error">{{ error }}</p>
           </sc-if>
+          <p class="form-privacy-notice">By sending this you agree to the <a href="privacy.html">Privacy Policy</a>. This form is protected by hCaptcha.</p>
           <div class="form-actions">
             <button type="submit" disabled="{{ sending }}" class="form-submit">Send message</button>
             <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">
@@ -360,6 +360,7 @@
       <a href="https://kyremworks.itch.io" target="_blank" rel="noopener">itch.io</a>
       <a href="https://www.youtube.com/@KyremWorks" target="_blank" rel="noopener">YouTube</a>
       <a href="https://www.instagram.com/kyremworks/" target="_blank" rel="noopener">Instagram</a>
+      <a href="privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">Design with life © 2026</div>
   </footer>

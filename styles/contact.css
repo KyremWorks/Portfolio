@@ -31,3 +31,6 @@ textarea.field-input{resize:vertical}
 .form-submit{align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
 .form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92}
 .form-sending{font-size:14px;color:var(--muted)}
+.form-privacy-notice{font-size:13px;line-height:1.5;color:var(--muted)}
+.form-privacy-notice a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.form-privacy-notice a:hover{color:#514BC4}
