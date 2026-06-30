@@ -11,7 +11,6 @@
 (function () {
   window.KW = window.KW || {};
 
-  var lang = 'it'
   // Project card fields: title, kind (corner badge), desc, tags[], link, img
   // (poster). previewGif (or `preview` video) plays on hover.
   // Commission fields: src, isVideo, label (corner badge), title; videos add a
@@ -43,7 +42,7 @@
         kind: "Long-term",
         desc: "A realistic real-world Minecraft server I've been working on for 5 years. I started out as a builder, but eventually took over the technical side. Today I co-own it: I manage our self-hosted Ubuntu VPS, code custom plugins, and define the project's roadmap.",
         tags: ["In development", "Long-term", "Ubuntu Server", "5 years"],
-        link: "glitchvalley.it",
+        link: "https://glitchvalley.it",
         linkMsg: "Learn more",
         img: "https://glitchvalley.it/images/logo.png",
         previewGif: ""
@@ -96,13 +95,13 @@
     var hasPreviewGif = project.previewGif && project.previewGif !== ""
     var hoverBadgeElement = hasPreviewGif ? React.createElement('div', { key: 'h', 'data-badge': true, style: badgeStyle }, '▶  Hover to play') : null;
     
-
-    return React.createElement('div', { onMouseEnter: play, onMouseLeave: stop, style: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' } },
+    var card = React.createElement('div', { onMouseEnter: play, onMouseLeave: stop, style: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' } },
       underlay,
       React.createElement('img', { key: 'p', 'data-poster': true, src: project.img, alt: project.title, style: Object.assign({}, FILL, { position: 'absolute', inset: 0, transition: 'opacity .3s ease', zIndex: 2 }) }),
       hoverBadgeElement
     );
-
+    
+    return card;
   }
 
   // ---- Commission media: static image, or a hover-played video with poster ----
@@ -123,4 +122,6 @@
 
   KW.buildProjectMedia = buildProjectMedia;
   KW.buildCommissionMedia = buildCommissionMedia;
+
+ 
 })();

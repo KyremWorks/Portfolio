@@ -24,7 +24,13 @@
 .tag{font-size:12px;font-weight:600;letter-spacing:0.03em;color:#D9AE45;border:1px solid rgba(217,174,69,0.4);padding:5px 11px;border-radius:100px}
 .project-link{margin-top:14px;text-decoration:none;color:#ECEDF0;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;border-bottom:1px solid rgba(236,237,240,0.3);padding-bottom:3px}
 .project-link-arrow{color:#D9AE45}
-
+.cards-scroll-btn{text-decoration:none;background:transparent;color:var(--ink);font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;border:1px solid rgba(var(--line-rgb),0.2);transition:background .25s ease,transform .25s ease,border-color .25s ease;display:inline-flex;align-items:center}
+.cards-scroll-btn:hover{background:rgba(var(--line-rgb),0.07);transform:translateX(2px);border-color:rgba(var(--line-rgb),0.34)}
+.cards-scroll-btn:hover.left{transform:translateX(-2px);}
+.card-nav {
+   display: flex;
+   gap: 1vw;
+}
 /* Dashed "more on itch.io" card pinned to the end of the carousel. */
 .end-card{scroll-snap-align:start;flex:0 0 clamp(260px,32vw,360px);text-decoration:none;border:1px dashed rgba(236,237,240,0.28);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#ECEDF0;text-align:center;padding:40px;transition:border-color .28s ease,transform .28s ease,background .28s ease}
 .end-card:hover{border-color:rgba(236,237,240,0.55);transform:translateY(-4px);background:rgba(236,237,240,0.03)}

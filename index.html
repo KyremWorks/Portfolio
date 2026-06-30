@@ -195,6 +195,11 @@
         <span class="section-index">02</span>
         <h2 class="section-heading">Selected work</h2>
       </div>
+      <div class="card-nav">
+        <button class="cards-scroll-btn left" onclick="{{ scrollLeft }}">←</button>
+        <button class="cards-scroll-btn" onclick="{{ scrollRight }}">→</button>
+      </div>
+      
     </div>
 
     <div ref="{{ trackRef }}" class="work-track">
@@ -265,7 +270,7 @@
 
   <!-- CHANNEL -->
   <section id="channel">
-    <div class="section-head channel-head">
+    <div class="section-head channel-head">   
       <span class="section-index">04</span>
       <h2 class="section-heading">I share my thinking out loud</h2>
     </div>
@@ -453,6 +458,7 @@ class Component extends DCLogic {
       toggleTheme: this.toggleTheme,
       wordRef: this.wordRef,
       stageRef: this.stageRef,
+      trackRef: this.trackRef,
       playerRef: this.playerRef,
       overlayRef: this.overlayRef,
       veilRef: this.veilRef,
@@ -460,6 +466,8 @@ class Component extends DCLogic {
       charRef: this.charRef,
       fireRef: this.fireRef,
       glowRef: this.glowRef,
+      scrollLeft: this.scrollLeft,
+      scrollRight: this.scrollRight,
       sending: this.state.sending,
       error: this.state.error,
       captchaError: this.state.captchaError,
@@ -495,6 +503,14 @@ class Component extends DCLogic {
       reset: () => {
         if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
         this.setState({ sent: false, error: null, captchaError: false });
+      },
+      scrollRight: () => {
+        const track = this.trackRef.current;
+        if (track) track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
+      },
+      scrollLeft: () => {
+        const track = this.trackRef.current;
+        if (track) track.scrollBy({ left: -track.clientWidth * 0.5, behavior: 'smooth' });
       }
     };
   }
