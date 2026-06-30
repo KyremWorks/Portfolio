@@ -11,6 +11,7 @@
 (function () {
   window.KW = window.KW || {};
 
+  var lang = 'it'
   // Project card fields: title, kind (corner badge), desc, tags[], link, img
   // (poster). previewGif (or `preview` video) plays on hover.
   // Commission fields: src, isVideo, label (corner badge), title; videos add a
